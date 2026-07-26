@@ -128,6 +128,7 @@
     position: absolute;
     inset: 0;
     z-index: var(--layer-base);
+    pointer-events: none;
   }
 
   .coming-soon-hero__media :is(img, video, svg, picture) {
@@ -294,6 +295,45 @@
     .coming-soon-hero__scroll-dot {
       animation-delay: 0.9s;
     }
+  }
+
+  /* Decorative section background must not capture pointer events */
+  .coming-soon-hero .section-background {
+    pointer-events: none;
+  }
+
+  /* Accent period — green only on the final punctuation mark */
+  .hero-accent {
+    color: #7CFF6B;
+  }
+
+  /* Premium Notify Me CTA — thin border pill, monochrome on dark */
+  .coming-soon-hero__content .button--notify_btn {
+    padding-inline: 32px;
+    padding-block: 13px;
+    border: 1px solid rgba(245, 245, 242, 0.3);
+    border-radius: 100px;
+    background: transparent;
+    color: #F5F5F2;
+    font-size: 0.625rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    cursor: pointer;
+    text-decoration: none;
+    transition: border-color 0.3s ease, background-color 0.3s ease;
+  }
+
+  @media (hover: hover) {
+    .coming-soon-hero__content .button--notify_btn:hover {
+      border-color: rgba(245, 245, 242, 0.65);
+      background-color: rgba(245, 245, 242, 0.06);
+    }
+  }
+
+  .coming-soon-hero__content .button--notify_btn:focus-visible {
+    outline: 2px solid rgba(245, 245, 242, 0.55);
+    outline-offset: 4px;
+    border-color: rgba(245, 245, 242, 0.6);
   }
 {% endstylesheet %}
 

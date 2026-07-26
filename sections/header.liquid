@@ -98,7 +98,7 @@
 
   capture actions
     if template.name == 'index'
-      echo '<a href="#notify" class="ryven-notify-btn">Notify Me</a>'
+      echo '<a href="#email-signup" class="ryven-notify-btn">Notify Me</a>'
     else
       render 'header-actions', customer_account_menu: section.settings.customer_account_menu, display_style: section.settings.actions_display_style, section: section
     endif

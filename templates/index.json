@@ -13,7 +13,7 @@
         "heading": {
           "type": "text",
           "settings": {
-            "text": "<p>Engineered for the Elite.</p>",
+            "text": "<p>Engineered for the Elite<span class=\"hero-accent\">.</span></p>",
             "type_preset": "h1",
             "width": "100%",
             "alignment": "center"
@@ -31,6 +31,7 @@
           "type": "button",
           "settings": {
             "label": "Notify Me",
+            "link": "#email-signup",
             "style_class": "button"
           }
         },
