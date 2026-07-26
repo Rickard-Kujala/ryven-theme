@@ -1,0 +1,7 @@
+{
+  "permissions": {
+    "allow": [
+      "PowerShell(npx @shopify/theme-check-cli 2>&1)"
+    ]
+  }
+}

@@ -5,15 +5,15 @@
       "settings": {
         "brand_name": "RYVEN",
         "background_color": "#0A0A0A",
-        "gap": 24,
-        "padding-block-start": 60,
-        "padding-block-end": 60
+        "gap": 32,
+        "padding-block-start": 80,
+        "padding-block-end": 80
       },
       "blocks": {
         "heading": {
           "type": "text",
           "settings": {
-            "text": "<p>Coming Soon</p>",
+            "text": "<p>Engineered for the Elite.</p>",
             "type_preset": "h1",
             "width": "100%",
             "alignment": "center"
@@ -22,7 +22,7 @@
         "subheading": {
           "type": "text",
           "settings": {
-            "text": "<p>The future of performance football.</p>",
+            "text": "<p>Premium performance football gear for the modern athlete.</p>",
             "width": "100%",
             "alignment": "center"
           }
