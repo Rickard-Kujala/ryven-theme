@@ -1,5 +1,11 @@
 
-{% render 'button', link: block.settings.link %}
+{% liquid
+  assign resolved_link = block.settings.link
+  if resolved_link == blank and section.type == 'coming-soon-hero' and block.id == 'notify_btn'
+    assign resolved_link = '#email-signup'
+  endif
+%}
+{% render 'button', link: resolved_link %}
 
 {% schema %}
 {

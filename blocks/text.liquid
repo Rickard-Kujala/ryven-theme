@@ -1,6 +1,19 @@
 
-
-{% render 'text', block: block %}
+{% if block.settings.type_preset == 'h1' and section.type == 'coming-soon-hero' %}
+  <div
+    class="spacing-style text-block text-block--{{ block.id }} h1 coming-soon-h1"
+    style="
+      --width: 100%;
+      --text-align: center;
+      {% render 'spacing-padding', settings: block.settings %}
+    "
+    {{ block.shopify_attributes }}
+  >
+    {{ block.settings.text -}}<span class="hero-accent" aria-hidden="true">.</span>
+  </div>
+{% else %}
+  {% render 'text', block: block %}
+{% endif %}
 
 {% schema %}
 {
