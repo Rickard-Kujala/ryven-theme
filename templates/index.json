@@ -4,18 +4,31 @@
       "type": "coming-soon-hero",
       "settings": {
         "brand_name": "RYVEN",
-        "background_media": "none",
-        "content_direction": "column",
-        "horizontal_alignment_flex_direction_column": "center",
-        "vertical_alignment_flex_direction_column": "center",
-        "gap": 24,
-        "section_width": "full-width",
-        "section_height": "full-screen",
         "background_color": "#0A0A0A",
-        "show_scroll_indicator": true,
+        "gap": 24,
         "padding-block-start": 60,
         "padding-block-end": 60
-      }
+      },
+      "blocks": {
+        "heading": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Coming Soon</p>",
+            "type_preset": "h1",
+            "width": "100%",
+            "alignment": "center"
+          }
+        },
+        "subheading": {
+          "type": "text",
+          "settings": {
+            "text": "<p>The future of performance football.</p>",
+            "width": "100%",
+            "alignment": "center"
+          }
+        }
+      },
+      "block_order": ["heading", "subheading"]
     }
   },
   "order": [
