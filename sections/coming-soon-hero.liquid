@@ -233,7 +233,7 @@
     margin: 0;
     text-align: center;
     width: 100%;
-    font-size: clamp(1.875rem, 5vw, 3.125rem);
+    font-size: clamp(2.25rem, 5.5vw, 3.5rem);
     letter-spacing: -0.03em;
     line-height: 1.04;
   }
@@ -321,10 +321,13 @@
     color: #7CFF6B;
   }
 
-  /* Premium Notify Me CTA — thin border pill, monochrome on dark */
-  .coming-soon-hero__content .button--notify_btn {
-    padding-inline: 32px;
-    padding-block: 13px;
+  /* Notify Me CTA */
+  .coming-soon-hero__content a.button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding-inline: 36px;
+    padding-block: 14px;
     border: 1px solid rgba(245, 245, 242, 0.3);
     border-radius: 100px;
     background: transparent;
@@ -334,20 +337,31 @@
     text-transform: uppercase;
     cursor: pointer;
     text-decoration: none;
-    transition: border-color 0.3s ease, background-color 0.3s ease;
+    pointer-events: auto;
+    transition: border-color 0.3s ease, background-color 0.3s ease, transform 0.25s ease;
   }
 
   @media (hover: hover) {
-    .coming-soon-hero__content .button--notify_btn:hover {
-      border-color: rgba(245, 245, 242, 0.65);
+    .coming-soon-hero__content a.button:hover {
+      border-color: rgba(245, 245, 242, 0.75);
       background-color: rgba(245, 245, 242, 0.06);
+      transform: scale(1.03);
     }
   }
 
-  .coming-soon-hero__content .button--notify_btn:focus-visible {
+  .coming-soon-hero__content a.button:focus-visible {
     outline: 2px solid rgba(245, 245, 242, 0.55);
     outline-offset: 4px;
     border-color: rgba(245, 245, 242, 0.6);
+  }
+
+  /* Launching Soon — supporting info, reduced visual weight */
+  .coming-soon-hero__content .button-unstyled {
+    font-size: 0.5625rem;
+    letter-spacing: 0.14em;
+    opacity: 0.35;
+    pointer-events: none;
+    cursor: default;
   }
 {% endstylesheet %}
 

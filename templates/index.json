@@ -7,14 +7,14 @@
         "brand_name": "RYVEN",
         "background_color": "#0A0A0A",
         "gap": 32,
-        "padding-block-start": 80,
-        "padding-block-end": 80
+        "padding-block-start": 40,
+        "padding-block-end": 100
       },
       "blocks": {
         "subheading": {
           "type": "text",
           "settings": {
-            "text": "<p>Premium football accessories engineered for players who demand confidence, precision and performance.</p>",
+            "text": "<p>Premium football accessories for players who demand more.</p>",
             "width": "100%",
             "alignment": "center"
           }
