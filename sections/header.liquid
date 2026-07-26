@@ -1250,6 +1250,13 @@
   #header-component[data-menu-style='drawer'].header--coming-soon .header__column--center { grid-area: center; justify-content: center; }
   #header-component[data-menu-style='drawer'].header--coming-soon .header__column--right { grid-area: right; justify-content: flex-end; }
 
+  /* Hide header Notify Me on mobile — the hero section has its own CTA */
+  @media screen and (max-width: 749px) {
+    .header--coming-soon .ryven-notify-btn {
+      display: none;
+    }
+  }
+
   /* Notify Me pill CTA */
   .ryven-notify-btn {
     display: inline-flex;
