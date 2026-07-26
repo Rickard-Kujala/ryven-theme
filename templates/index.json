@@ -13,7 +13,7 @@
         "heading": {
           "type": "text",
           "settings": {
-            "text": "<p>Engineered for the Elite<span class=\"hero-accent\">.</span></p>",
+            "text": "<p>Engineered for the Elite</p>",
             "type_preset": "h1",
             "width": "100%",
             "alignment": "center"

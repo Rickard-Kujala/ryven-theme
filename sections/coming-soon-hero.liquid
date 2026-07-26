@@ -302,8 +302,9 @@
     pointer-events: none;
   }
 
-  /* Accent period — green only on the final punctuation mark */
-  .hero-accent {
+  /* Accent period — injected via ::after so richtext stays attribute-free */
+  .coming-soon-hero__content .text-block--heading p::after {
+    content: '.';
     color: #7CFF6B;
   }
 
