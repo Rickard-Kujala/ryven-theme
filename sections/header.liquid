@@ -18,9 +18,9 @@
     render 'slideshow-styles'
   endif
 
-  if section.settings.enable_transparent_header_home and template.name == 'index'
+  if template.name == 'index'
     assign transparent = 'always'
-    assign transparent_text_color_setting = section.settings.text_color_transparent_home
+    assign transparent_text_color_setting = section.settings.text_color_transparent_home | default: '#F5F5F2'
   elsif section.settings.enable_transparent_header_product and template.name == 'product'
     assign transparent = 'always'
     assign transparent_text_color_setting = section.settings.text_color_transparent_product
@@ -97,7 +97,11 @@
   endcapture
 
   capture actions
-    render 'header-actions', customer_account_menu: section.settings.customer_account_menu, display_style: section.settings.actions_display_style, section: section
+    if template.name == 'index'
+      echo '<a href="#notify" class="ryven-notify-btn">Notify Me</a>'
+    else
+      render 'header-actions', customer_account_menu: section.settings.customer_account_menu, display_style: section.settings.actions_display_style, section: section
+    endif
   endcapture
 
   if shop.customer_accounts_enabled
@@ -193,6 +197,10 @@
 
   if collapse_header_paddings_class
     assign class = class | append: ' ' | append: collapse_header_paddings_class
+  endif
+
+  if template.name == 'index'
+    assign class = class | append: ' header--coming-soon'
   endif
 
   # Determine transparent background value
@@ -1166,6 +1174,58 @@
   .dropdown-localization:not(dropdown-localization-component) .language-selector {
     font-family: var(--menu-localization-font);
     font-size: var(--menu-localization-font-size);
+  }
+
+  /* ================================
+     Coming Soon header (index template)
+     ================================ */
+
+  /* Hide nav, search, localization, and mobile drawer */
+  .header--coming-soon header-menu,
+  .header--coming-soon .dropdown-localization,
+  .header--coming-soon .search-action,
+  .header--coming-soon .header__drawer {
+    display: none;
+  }
+
+  /* Desktop: reflow to logo-left / CTA-right two-column layout */
+  @media screen and (min-width: 750px) {
+    .header--coming-soon .header__column--left {
+      display: none;
+    }
+
+    .header--coming-soon .header__columns {
+      grid-template-areas: 'center right';
+      grid-template-columns: auto 1fr;
+    }
+
+    .header--coming-soon .header__column--center {
+      justify-content: flex-start;
+    }
+  }
+
+  /* Notify Me pill CTA */
+  .ryven-notify-btn {
+    display: inline-flex;
+    align-items: center;
+    padding: 9px 22px;
+    border: 1px solid rgba(245, 245, 242, 0.4);
+    border-radius: 100px;
+    font-family: var(--font-accent--family, var(--font-body--family));
+    font-size: 0.625rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: #F5F5F2;
+    text-decoration: none;
+    white-space: nowrap;
+    transition: border-color 0.3s ease, background-color 0.3s ease;
+  }
+
+  @media (hover: hover) {
+    .ryven-notify-btn:hover {
+      border-color: rgba(245, 245, 242, 0.75);
+      background-color: rgba(245, 245, 242, 0.06);
+    }
   }
 {% endstylesheet %}
 

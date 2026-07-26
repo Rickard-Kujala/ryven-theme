@@ -22,13 +22,27 @@
         "subheading": {
           "type": "text",
           "settings": {
-            "text": "<p>Premium performance football gear for the modern athlete.</p>",
+            "text": "<p>Premium football accessories engineered for players who demand confidence, precision and performance.</p>",
             "width": "100%",
             "alignment": "center"
           }
+        },
+        "notify_btn": {
+          "type": "button",
+          "settings": {
+            "label": "Notify Me",
+            "style_class": "button"
+          }
+        },
+        "launching_soon": {
+          "type": "button",
+          "settings": {
+            "label": "Launching Soon",
+            "style_class": "button-unstyled"
+          }
         }
       },
-      "block_order": ["heading", "subheading"]
+      "block_order": ["heading", "subheading", "notify_btn", "launching_soon"]
     }
   },
   "order": [
