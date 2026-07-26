@@ -88,6 +88,13 @@
           <p class="coming-soon-hero__brand">{{ section.settings.brand_name | escape }}</p>
         {% endif %}
 
+        {% if section.settings.hero_heading != blank %}
+          {%- assign _hero_last_char = section.settings.hero_heading | strip_html | rstrip | slice: -1 -%}
+          <div class="spacing-style text-block h1 coming-soon-h1" style="--width: 100%; --text-align: center;">
+            {{ section.settings.hero_heading -}}{% unless _hero_last_char == '.' %}<span class="hero-accent-period" aria-hidden="true">.</span>{% endunless %}
+          </div>
+        {% endif %}
+
         {% content_for 'blocks' %}
       </div>
 
@@ -368,6 +375,12 @@
     "groups": ["header"]
   },
   "settings": [
+    {
+      "type": "richtext",
+      "id": "hero_heading",
+      "label": "Headline",
+      "default": "<p>Engineered for the Elite</p>"
+    },
     {
       "type": "header",
       "content": "t:content.brand"

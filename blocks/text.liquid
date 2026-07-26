@@ -1,20 +1,5 @@
 
-{% if block.settings.type_preset == 'h1' and section.type == 'coming-soon-hero' %}
-  {%- assign _heading_last_char = block.settings.text | strip_html | rstrip | slice: -1 -%}
-  <div
-    class="spacing-style text-block text-block--{{ block.id }} h1 coming-soon-h1"
-    style="
-      --width: 100%;
-      --text-align: center;
-      {% render 'spacing-padding', settings: block.settings %}
-    "
-    {{ block.shopify_attributes }}
-  >
-    {{ block.settings.text -}}{% unless _heading_last_char == '.' %}<span class="hero-accent-period" aria-hidden="true">.</span>{% endunless %}
-  </div>
-{% else %}
-  {% render 'text', block: block %}
-{% endif %}
+{% render 'text', block: block %}
 
 {% schema %}
 {

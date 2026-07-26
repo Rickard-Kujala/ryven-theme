@@ -3,6 +3,7 @@
     "coming_soon_hero": {
       "type": "coming-soon-hero",
       "settings": {
+        "hero_heading": "<p>Engineered for the Elite</p>",
         "brand_name": "RYVEN",
         "background_color": "#0A0A0A",
         "gap": 32,
@@ -10,15 +11,6 @@
         "padding-block-end": 80
       },
       "blocks": {
-        "heading": {
-          "type": "text",
-          "settings": {
-            "text": "<p>Engineered for the Elite</p>",
-            "type_preset": "h1",
-            "width": "100%",
-            "alignment": "center"
-          }
-        },
         "subheading": {
           "type": "text",
           "settings": {
@@ -43,7 +35,7 @@
           }
         }
       },
-      "block_order": ["heading", "subheading", "notify_btn", "launching_soon"]
+      "block_order": ["subheading", "notify_btn", "launching_soon"]
     },
     "ryven_waitlist": {
       "type": "ryven-waitlist",
