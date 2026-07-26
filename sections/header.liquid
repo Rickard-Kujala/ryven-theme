@@ -1184,7 +1184,8 @@
   .header--coming-soon header-menu,
   .header--coming-soon .dropdown-localization,
   .header--coming-soon .search-action,
-  .header--coming-soon .header__drawer {
+  .header--coming-soon header-drawer,
+  .header--coming-soon .header__icon--menu {
     display: none;
   }
 
@@ -1204,7 +1205,7 @@
     }
   }
 
-  /* Mobile: restore columns from display:contents so Notify Me pill has full right area */
+  /* Mobile: 3-column balanced layout — logo centered, Notify Me right, no hamburger */
   @media screen and (max-width: 749px) {
     .header--coming-soon .header__columns {
       grid-template-areas: 'left center right';
@@ -1213,14 +1214,17 @@
       column-gap: 0;
     }
 
-    .header--coming-soon .header__column--left,
+    /* Left column only holds the drawer trigger; hide it — grid column keeps 1fr for centering */
+    .header--coming-soon .header__column--left {
+      display: none;
+    }
+
     .header--coming-soon .header__column--center,
     .header--coming-soon .header__column--right {
       display: flex;
       align-items: center;
     }
 
-    .header--coming-soon .header__column--left { grid-area: left; justify-content: flex-start; }
     .header--coming-soon .header__column--center { grid-area: center; justify-content: center; }
     .header--coming-soon .header__column--right { grid-area: right; justify-content: flex-end; }
   }
@@ -1233,14 +1237,16 @@
     column-gap: 0;
   }
 
-  #header-component[data-menu-style='drawer'].header--coming-soon .header__column--left,
+  #header-component[data-menu-style='drawer'].header--coming-soon .header__column--left {
+    display: none;
+  }
+
   #header-component[data-menu-style='drawer'].header--coming-soon .header__column--center,
   #header-component[data-menu-style='drawer'].header--coming-soon .header__column--right {
     display: flex;
     align-items: center;
   }
 
-  #header-component[data-menu-style='drawer'].header--coming-soon .header__column--left { grid-area: left; justify-content: flex-start; }
   #header-component[data-menu-style='drawer'].header--coming-soon .header__column--center { grid-area: center; justify-content: center; }
   #header-component[data-menu-style='drawer'].header--coming-soon .header__column--right { grid-area: right; justify-content: flex-end; }
 
