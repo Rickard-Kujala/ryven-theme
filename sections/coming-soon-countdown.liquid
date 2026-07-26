@@ -1,0 +1,288 @@
+<script
+  src="{{ 'coming-soon-countdown.js' | asset_url }}"
+  type="module"
+  fetchpriority="low"
+></script>
+
+{% liquid
+  if section.settings.background_color != blank
+    render 'contrast-override', background_color: section.settings.background_color, section_id: section.id
+  endif
+%}
+
+<div class="section-background{% if section.settings.background_color != blank %} color-custom-{{ section.id }}{% endif %}"></div>
+<div class="section section--{{ section.settings.section_width }}{% if section.settings.background_color != blank %} color-custom-{{ section.id }}{% endif %}">
+  <div
+    class="spacing-style coming-soon-countdown-wrapper"
+    style="
+      {% render 'spacing-style', settings: section.settings %}
+      --countdown-accent: {{ settings.color_palette.color1 }};
+    "
+  >
+    {% if section.settings.countdown_target != blank %}
+      <coming-soon-countdown
+        class="coming-soon-countdown"
+        data-target="{{ section.settings.countdown_target | escape }}"
+        data-label-days="{{ section.settings.days_label | escape }}"
+        data-label-hours="{{ section.settings.hours_label | escape }}"
+        data-label-minutes="{{ section.settings.minutes_label | escape }}"
+        data-label-seconds="{{ section.settings.seconds_label | escape }}"
+        data-expired-message="{{ section.settings.expired_heading | escape }}"
+      >
+        <div
+          class="coming-soon-countdown__grid"
+          role="group"
+          aria-label="{{ 'accessibility.countdown_timer' | t }}"
+        >
+          <div class="coming-soon-countdown__unit">
+            <span
+              class="coming-soon-countdown__value"
+              ref="daysValue"
+              aria-hidden="true"
+            >00</span>
+            <span
+              class="coming-soon-countdown__label"
+              aria-hidden="true"
+            >{{ section.settings.days_label | escape }}</span>
+          </div>
+          <div class="coming-soon-countdown__unit">
+            <span
+              class="coming-soon-countdown__value"
+              ref="hoursValue"
+              aria-hidden="true"
+            >00</span>
+            <span
+              class="coming-soon-countdown__label"
+              aria-hidden="true"
+            >{{ section.settings.hours_label | escape }}</span>
+          </div>
+          <div class="coming-soon-countdown__unit">
+            <span
+              class="coming-soon-countdown__value"
+              ref="minutesValue"
+              aria-hidden="true"
+            >00</span>
+            <span
+              class="coming-soon-countdown__label"
+              aria-hidden="true"
+            >{{ section.settings.minutes_label | escape }}</span>
+          </div>
+          <div class="coming-soon-countdown__unit">
+            <span
+              class="coming-soon-countdown__value"
+              ref="secondsValue"
+              aria-hidden="true"
+            >00</span>
+            <span
+              class="coming-soon-countdown__label"
+              aria-hidden="true"
+            >{{ section.settings.seconds_label | escape }}</span>
+          </div>
+        </div>
+        <p
+          class="visually-hidden"
+          ref="liveRegion"
+          aria-live="polite"
+        ></p>
+      </coming-soon-countdown>
+    {% elsif request.design_mode %}
+      <p class="coming-soon-countdown__placeholder">{{ 'content.coming_soon_countdown_placeholder' | t }}</p>
+    {% endif %}
+
+    {% content_for 'blocks' %}
+  </div>
+</div>
+
+{% stylesheet %}
+  .coming-soon-countdown-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 32px;
+    text-align: center;
+  }
+
+  .coming-soon-countdown__grid {
+    display: flex;
+    justify-content: center;
+    gap: clamp(20px, 5vw, 48px);
+  }
+
+  .coming-soon-countdown__unit {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    min-width: 3.5em;
+    position: relative;
+  }
+
+  .coming-soon-countdown__unit + .coming-soon-countdown__unit::before {
+    content: '';
+    position: absolute;
+    left: clamp(-14px, -3vw, -24px);
+    top: 0.2em;
+    width: 1px;
+    height: 0.7em;
+    background: rgb(var(--color-rgb, var(--color-foreground-rgb)) / var(--opacity-20, 0.2));
+  }
+
+  .coming-soon-countdown__value {
+    font-family: var(--font-heading--family);
+    font-size: clamp(2.25rem, 7vw, 5rem);
+    line-height: 1;
+    letter-spacing: -0.02em;
+    font-variant-numeric: tabular-nums;
+    color: var(--countdown-accent, var(--color, var(--color-foreground)));
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .coming-soon-countdown__value {
+      transition: opacity 0.2s ease;
+    }
+
+    .coming-soon-countdown {
+      animation: coming-soon-countdown-fade-up 0.8s ease both;
+    }
+  }
+
+  @keyframes coming-soon-countdown-fade-up {
+    from {
+      opacity: 0;
+      transform: translateY(12px);
+    }
+
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .coming-soon-countdown__label {
+    font-size: 0.6875rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--color-foreground-subdued, var(--color, var(--color-foreground)));
+  }
+
+  coming-soon-countdown[expired] .coming-soon-countdown__grid {
+    display: none;
+  }
+
+  .coming-soon-countdown__placeholder {
+    color: var(--color-foreground-subdued, var(--color, var(--color-foreground)));
+    font-style: italic;
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "t:names.coming_soon_countdown",
+  "tag": "section",
+  "class": "section-wrapper section-coming-soon-countdown",
+  "blocks": [
+    { "type": "@theme" },
+    { "type": "@app" }
+  ],
+  "disabled_on": {
+    "groups": ["header"]
+  },
+  "settings": [
+    {
+      "type": "header",
+      "content": "t:content.countdown"
+    },
+    {
+      "type": "text",
+      "id": "countdown_target",
+      "label": "t:settings.countdown_target",
+      "placeholder": "2026-12-31T09:00",
+      "info": "t:info.countdown_target_format"
+    },
+    {
+      "type": "text",
+      "id": "days_label",
+      "label": "t:settings.days_label",
+      "default": "t:text_defaults.days"
+    },
+    {
+      "type": "text",
+      "id": "hours_label",
+      "label": "t:settings.hours_label",
+      "default": "t:text_defaults.hours"
+    },
+    {
+      "type": "text",
+      "id": "minutes_label",
+      "label": "t:settings.minutes_label",
+      "default": "t:text_defaults.minutes"
+    },
+    {
+      "type": "text",
+      "id": "seconds_label",
+      "label": "t:settings.seconds_label",
+      "default": "t:text_defaults.seconds"
+    },
+    {
+      "type": "text",
+      "id": "expired_heading",
+      "label": "t:settings.expired_heading",
+      "default": "t:text_defaults.were_live"
+    },
+    {
+      "type": "header",
+      "content": "t:content.size"
+    },
+    {
+      "type": "select",
+      "id": "section_width",
+      "label": "t:settings.width",
+      "options": [
+        { "value": "page-width", "label": "t:options.page" },
+        { "value": "full-width", "label": "t:options.full" }
+      ],
+      "default": "page-width"
+    },
+    {
+      "type": "header",
+      "content": "t:content.appearance"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "t:settings.background_color",
+      "placeholder": "t:settings.default"
+    },
+    {
+      "type": "header",
+      "content": "t:content.padding"
+    },
+    {
+      "type": "range",
+      "id": "padding-block-start",
+      "label": "t:settings.top",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 64
+    },
+    {
+      "type": "range",
+      "id": "padding-block-end",
+      "label": "t:settings.bottom",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 64
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:names.coming_soon_countdown",
+      "category": "t:categories.banners"
+    }
+  ]
+}
+{% endschema %}

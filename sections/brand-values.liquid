@@ -1,0 +1,281 @@
+{% liquid
+  if section.settings.background_color != blank
+    render 'contrast-override', background_color: section.settings.background_color, section_id: section.id
+  endif
+%}
+
+<div class="section-background{% if section.settings.background_color != blank %} color-custom-{{ section.id }}{% endif %}"></div>
+<div class="section section--{{ section.settings.section_width }}{% if section.settings.background_color != blank %} color-custom-{{ section.id }}{% endif %}">
+  <div
+    class="spacing-style brand-values"
+    style="
+      {% render 'spacing-style', settings: section.settings %}
+      --brand-values-columns: {{ section.settings.columns }};
+      --brand-values-gap: {{ section.settings.gap }}px;
+    "
+  >
+    {% content_for 'blocks' %}
+  </div>
+</div>
+
+{% stylesheet %}
+  .brand-values {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--brand-values-gap);
+  }
+
+  @media screen and (min-width: 750px) {
+    .brand-values {
+      grid-template-columns: repeat(var(--brand-values-columns), 1fr);
+    }
+  }
+
+  .brand-values .group-block {
+    transition: transform 0.35s ease, border-color 0.35s ease;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .brand-values .group-block:hover {
+      transform: translateY(-6px);
+    }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "t:names.brand_values",
+  "tag": "section",
+  "class": "section-wrapper section-brand-values",
+  "blocks": [
+    { "type": "@theme" },
+    { "type": "@app" },
+    { "type": "group" },
+    { "type": "text" }
+  ],
+  "disabled_on": {
+    "groups": ["header"]
+  },
+  "settings": [
+    {
+      "type": "header",
+      "content": "t:content.layout"
+    },
+    {
+      "type": "range",
+      "id": "columns",
+      "label": "t:settings.columns",
+      "min": 1,
+      "max": 4,
+      "step": 1,
+      "default": 3
+    },
+    {
+      "type": "range",
+      "id": "gap",
+      "label": "t:settings.gap",
+      "min": 0,
+      "max": 80,
+      "step": 4,
+      "unit": "px",
+      "default": 24
+    },
+    {
+      "type": "header",
+      "content": "t:content.size"
+    },
+    {
+      "type": "select",
+      "id": "section_width",
+      "label": "t:settings.width",
+      "options": [
+        { "value": "page-width", "label": "t:options.page" },
+        { "value": "full-width", "label": "t:options.full" }
+      ],
+      "default": "page-width"
+    },
+    {
+      "type": "header",
+      "content": "t:content.appearance"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "t:settings.background_color",
+      "placeholder": "t:settings.default"
+    },
+    {
+      "type": "header",
+      "content": "t:content.padding"
+    },
+    {
+      "type": "range",
+      "id": "padding-block-start",
+      "label": "t:settings.top",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 64
+    },
+    {
+      "type": "range",
+      "id": "padding-block-end",
+      "label": "t:settings.bottom",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 64
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:names.brand_values",
+      "category": "t:categories.text",
+      "blocks": {
+        "performance": {
+          "type": "group",
+          "name": "t:names.card",
+          "settings": {
+            "content_direction": "column",
+            "horizontal_alignment_flex_direction_column": "center",
+            "vertical_alignment_flex_direction_column": "center",
+            "gap": 16,
+            "width": "fill",
+            "height": "fit",
+            "border": "solid",
+            "border_width": 1,
+            "border_color": "{{ settings.color_palette.color2 }}",
+            "border_opacity": 100,
+            "border_radius": 16,
+            "padding-block-start": 48,
+            "padding-block-end": 48,
+            "padding-inline-start": 32,
+            "padding-inline-end": 32
+          },
+          "blocks": {
+            "heading": {
+              "type": "text",
+              "name": "t:names.heading",
+              "settings": {
+                "text": "t:html_defaults.brand_value_performance_heading",
+                "type_preset": "h4",
+                "width": "100%",
+                "alignment": "center"
+              }
+            },
+            "text": {
+              "type": "text",
+              "name": "t:names.text",
+              "settings": {
+                "text": "t:html_defaults.brand_value_performance_text",
+                "type_preset": "rte",
+                "width": "100%",
+                "alignment": "center"
+              }
+            }
+          },
+          "block_order": ["heading", "text"]
+        },
+        "precision": {
+          "type": "group",
+          "name": "t:names.card",
+          "settings": {
+            "content_direction": "column",
+            "horizontal_alignment_flex_direction_column": "center",
+            "vertical_alignment_flex_direction_column": "center",
+            "gap": 16,
+            "width": "fill",
+            "height": "fit",
+            "border": "solid",
+            "border_width": 1,
+            "border_color": "{{ settings.color_palette.color2 }}",
+            "border_opacity": 100,
+            "border_radius": 16,
+            "padding-block-start": 48,
+            "padding-block-end": 48,
+            "padding-inline-start": 32,
+            "padding-inline-end": 32
+          },
+          "blocks": {
+            "heading": {
+              "type": "text",
+              "name": "t:names.heading",
+              "settings": {
+                "text": "t:html_defaults.brand_value_precision_heading",
+                "type_preset": "h4",
+                "width": "100%",
+                "alignment": "center"
+              }
+            },
+            "text": {
+              "type": "text",
+              "name": "t:names.text",
+              "settings": {
+                "text": "t:html_defaults.brand_value_precision_text",
+                "type_preset": "rte",
+                "width": "100%",
+                "alignment": "center"
+              }
+            }
+          },
+          "block_order": ["heading", "text"]
+        },
+        "progress": {
+          "type": "group",
+          "name": "t:names.card",
+          "settings": {
+            "content_direction": "column",
+            "horizontal_alignment_flex_direction_column": "center",
+            "vertical_alignment_flex_direction_column": "center",
+            "gap": 16,
+            "width": "fill",
+            "height": "fit",
+            "border": "solid",
+            "border_width": 1,
+            "border_color": "{{ settings.color_palette.color2 }}",
+            "border_opacity": 100,
+            "border_radius": 16,
+            "padding-block-start": 48,
+            "padding-block-end": 48,
+            "padding-inline-start": 32,
+            "padding-inline-end": 32
+          },
+          "blocks": {
+            "heading": {
+              "type": "text",
+              "name": "t:names.heading",
+              "settings": {
+                "text": "t:html_defaults.brand_value_progress_heading",
+                "type_preset": "h4",
+                "width": "100%",
+                "alignment": "center"
+              }
+            },
+            "text": {
+              "type": "text",
+              "name": "t:names.text",
+              "settings": {
+                "text": "t:html_defaults.brand_value_progress_text",
+                "type_preset": "rte",
+                "width": "100%",
+                "alignment": "center"
+              }
+            }
+          },
+          "block_order": ["heading", "text"]
+        }
+      },
+      "block_order": ["performance", "precision", "progress"],
+      "settings": {
+        "columns": 3,
+        "gap": 24,
+        "section_width": "page-width",
+        "padding-block-start": 80,
+        "padding-block-end": 80
+      }
+    }
+  ]
+}
+{% endschema %}
