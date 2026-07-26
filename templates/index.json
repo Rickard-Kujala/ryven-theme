@@ -1,8 +1,24 @@
 {
   "sections": {
-    "main": {
-      "type": "divider"
+    "coming_soon_hero": {
+      "type": "coming-soon-hero",
+      "settings": {
+        "brand_name": "RYVEN",
+        "background_media": "none",
+        "content_direction": "column",
+        "horizontal_alignment_flex_direction_column": "center",
+        "vertical_alignment_flex_direction_column": "center",
+        "gap": 24,
+        "section_width": "full-width",
+        "section_height": "full-screen",
+        "background_color": "#0A0A0A",
+        "show_scroll_indicator": true,
+        "padding-block-start": 60,
+        "padding-block-end": 60
+      }
     }
   },
-  "order": ["main"]
+  "order": [
+    "coming_soon_hero"
+  ]
 }
