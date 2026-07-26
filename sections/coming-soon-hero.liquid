@@ -89,10 +89,7 @@
         {% endif %}
 
         {% if section.settings.hero_heading != blank %}
-          {%- assign _hero_last_char = section.settings.hero_heading | strip_html | rstrip | slice: -1 -%}
-          <div class="spacing-style text-block h1 coming-soon-h1" style="--width: 100%; --text-align: center;">
-            {{ section.settings.hero_heading -}}{% unless _hero_last_char == '.' %}<span class="hero-accent-period" aria-hidden="true">.</span>{% endunless %}
-          </div>
+          <h1 class="coming-soon-hero__headline h1">{{- section.settings.hero_heading | escape -}}<span class="hero-accent-period" aria-hidden="true">.</span></h1>
         {% endif %}
 
         {% content_for 'blocks' %}
@@ -231,8 +228,11 @@
     }
   }
 
-  /* Premium typography hierarchy */
-  .coming-soon-hero__content .h1 > * {
+  /* Hero headline typography */
+  .coming-soon-hero__headline {
+    margin: 0;
+    text-align: center;
+    width: 100%;
     font-size: clamp(1.875rem, 5vw, 3.125rem);
     letter-spacing: -0.03em;
     line-height: 1.04;
@@ -309,17 +309,15 @@
     pointer-events: none;
   }
 
-  /* h1 heading: override text-block flex so accent span renders inline with text */
-  .coming-soon-h1 {
-    display: block;
-    text-align: center;
-  }
-
-  .coming-soon-h1 p {
-    display: inline;
-  }
-
   .hero-accent-period {
+    display: inline;
+    color: #7CFF6B;
+    font: inherit;
+    line-height: inherit;
+    letter-spacing: inherit;
+  }
+
+  .coming-soon-hero__headline .hero-accent-period {
     color: #7CFF6B;
   }
 
@@ -376,10 +374,10 @@
   },
   "settings": [
     {
-      "type": "richtext",
+      "type": "text",
       "id": "hero_heading",
       "label": "Headline",
-      "default": "<p>Engineered for the Elite</p>"
+      "default": "Engineered for the Elite"
     },
     {
       "type": "header",

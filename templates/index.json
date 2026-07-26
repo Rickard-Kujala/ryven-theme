@@ -3,7 +3,7 @@
     "coming_soon_hero": {
       "type": "coming-soon-hero",
       "settings": {
-        "hero_heading": "<p>Engineered for the Elite</p>",
+        "hero_heading": "Engineered for the Elite",
         "brand_name": "RYVEN",
         "background_color": "#0A0A0A",
         "gap": 32,
