@@ -31,7 +31,7 @@
           "type": "button",
           "settings": {
             "label": "Notify Me",
-            "link": "#email-signup",
+            "link": "#ryven-waitlist",
             "style_class": "button"
           }
         },
@@ -44,9 +44,23 @@
         }
       },
       "block_order": ["heading", "subheading", "notify_btn", "launching_soon"]
+    },
+    "ryven_waitlist": {
+      "type": "ryven-waitlist",
+      "settings": {
+        "eyebrow": "— Waitlist",
+        "heading": "Be the first to know",
+        "subheading": "Premium football accessories, launching soon.",
+        "input_placeholder": "Enter your email",
+        "button_label": "Join the Waitlist",
+        "background_color": "#0A0A0A",
+        "padding-block-start": 80,
+        "padding-block-end": 80
+      }
     }
   },
   "order": [
-    "coming_soon_hero"
+    "coming_soon_hero",
+    "ryven_waitlist"
   ]
 }
